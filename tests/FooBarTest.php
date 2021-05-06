@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Service\IsBar;
 use App\Service\IsFoo;
+use App\Service\IsQix;
 use PHPUnit\Framework\TestCase;
 
 class FooBarTest extends TestCase
@@ -39,5 +40,20 @@ class FooBarTest extends TestCase
 
     }
 
+    public function testQix():void
+    {
+        $testIsQix = new IsQix(14);
+        $this->assertEquals('Qix', $testIsQix->IsQix());
+
+        $testNotQix = new IsQix(13);
+        $this->assertEquals(null, $testNotQix->IsQix());
+
+        $testStringToInt = new IsQix('21');
+        $this->assertEquals('Qix', $testStringToInt->IsQix());
+
+        $testPositive = new IsQix(-21);
+        $this->assertEquals(null, $testPositive->IsQix());
+
+    }
 
 }
