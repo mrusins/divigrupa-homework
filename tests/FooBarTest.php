@@ -4,10 +4,13 @@ namespace Tests;
 
 use App\Model\Num;
 
+use App\Service\EqualService;
 use App\Service\IsServices\IsBar;
 use App\Service\IsServices\IsFoo;
 use App\Service\IsServices\IsInf;
 use App\Service\IsServices\IsQix;
+use App\Service\MultipleEqualService;
+use App\Service\MultipleService;
 use PHPUnit\Framework\TestCase;
 
 class FooBarTest extends TestCase
@@ -107,6 +110,36 @@ class FooBarTest extends TestCase
         $this->assertEquals(null, $testPositive->isMultiple());
         $this->assertEquals(null, $testPositive->isEqual());
 
+    }
+
+    public function testMultipleService()
+    {
+        $multipleService = new MultipleService();
+        $this->assertEquals('Foo', $multipleService->isMultiple(9));
+        $this->assertEquals('FooBar', $multipleService->isMultiple(15));
+        $this->assertEquals('FooBarQix', $multipleService->isMultiple(420));
+        $this->assertEquals('398', $multipleService->isMultiple(398));
+        $this->assertEquals('1', $multipleService->isMultiple(1));
+    }
+
+    public function testEqualService()
+    {
+        $equalService = new EqualService();
+        $this->assertEquals('3: Foo', $equalService->isEqual(3));
+        $this->assertEquals('5: Bar', $equalService->isEqual(5));
+        $this->assertEquals('7: Qix', $equalService->isEqual(7));
+        $this->assertEquals('537: BarFooQix', $equalService->isEqual(537));
+        $this->assertEquals('1: ', $equalService->isEqual(1));
+    }
+
+    public function testMultipleEqualService()
+    {
+        $multipleEqualService = new MultipleEqualService();
+        $this->assertEquals('Foo', $multipleEqualService->isMultipleEqual(3));
+        $this->assertEquals('17: QixInf', $multipleEqualService->isMultipleEqual(17));
+        $this->assertEquals('Foo;Qix', $multipleEqualService->isMultipleEqual(21));
+        $this->assertEquals('142: ', $multipleEqualService->isMultipleEqual(142));
+        $this->assertEquals('1: ', $multipleEqualService->isMultipleEqual(1));
     }
 
 }

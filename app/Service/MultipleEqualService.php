@@ -11,13 +11,17 @@ class MultipleEqualService
 {
     private array $resultArray = [];
     private string $result;
+    private int $num;
+    private int $sumOfAllDigits;
 
     public function isMultipleEqual(int $num): string
     {
-
+        $this->resultArray = [];
+        $this->num = $num;
         $numModel = new Num();
         $numModel->setNumber($num);
         $number = $numModel->getNumber();
+
 
         $isFoo = new IsFoo($number);
         $isInf = new IsInf($number);
@@ -35,6 +39,7 @@ class MultipleEqualService
         if (count($this->resultArray) === 0) {
             array_push($this->resultArray, $number);
         }
+
         $this->result = implode(';', $this->resultArray);
 
 
@@ -64,8 +69,17 @@ class MultipleEqualService
 
                 $this->result = $num . ': ' . implode('', $this->resultArray);
             }
-
         }
-        return $this->result;
+        return $this->result . $this->sumAllDigits();
+    }
+
+    private function sumAllDigits(): ?string
+    {
+        $number = (string)$this->num;
+        $splitNum = str_split($number);
+        $numbers = array_map('intval', $splitNum);
+        $this->sumOfAllDigits = array_sum($numbers);
+        $inf = new IsInf($this->sumOfAllDigits);
+        return $inf->isMultiple();
     }
 }

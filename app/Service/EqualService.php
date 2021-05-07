@@ -13,7 +13,7 @@ class EqualService
 
     public function isEqual(int $num): string
     {
-
+        $this->equals = [];
         $loopNumber = (string)$num;
         $splitNum = str_split($loopNumber);
         $numbers = array_map('intval', $splitNum);
@@ -31,7 +31,7 @@ class EqualService
                 $isQix->isEqual());
 
         }
-        return implode('', $this->equals);
+        return $num . ': ' . implode('', $this->equals);
     }
 
 }
