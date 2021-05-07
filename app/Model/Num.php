@@ -5,14 +5,15 @@ namespace App\Model;
 class Num
 {
 
-    private int $number;
+    private int $number = 0;
 
-    public function __construct(int $number){
-
+    public function setNumber(int $number): void
+    {
         $this->number = $number;
     }
 
-    public function getNumber():int{
+    public function getNumber(): int
+    {
         return $this->number;
     }
 }

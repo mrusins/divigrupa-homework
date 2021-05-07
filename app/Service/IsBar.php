@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class IsBar
+class IsBar implements IsInterface
 {
     private int $number;
 
@@ -11,10 +11,14 @@ class IsBar
         $this->number = $number;
     }
 
-    public function isBar(): ?string
+    public function isMultiple(): ?string
     {
-        return $this->number < 0 ? null : ($this->number % 5 === 0 ? 'Bar':null);
+        return $this->number < 0 ? null : ($this->number % 5 === 0 ? 'Bar' : null);
+    }
 
+    public function isEqual(): ?string
+    {
+        return $this->number === 5 ? 'Bar' : null;
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class IsQix
+class IsQix implements IsInterface
 {
     private int $number;
 
@@ -12,9 +12,15 @@ class IsQix
         $this->number = $number;
 
     }
-    public function isQix(): ?string
+
+    public function isMultiple(): ?string
     {
-        return $this->number < 0  ? null : ($this->number % 7 === 0 ? 'Qix':null);
+        return $this->number < 0 ? null : ($this->number % 7 === 0 ? 'Qix' : null);
+    }
+
+    public function isEqual(): ?string
+    {
+        return $this->number === 7 ? 'Qix' : null;
     }
 
 }

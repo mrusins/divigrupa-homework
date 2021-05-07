@@ -2,7 +2,8 @@
 
 namespace App\Service;
 
-class IsFoo
+
+class IsFoo implements IsInterface
 {
     private int $number;
 
@@ -12,9 +13,15 @@ class IsFoo
         $this->number = $number;
 
     }
-    public function isFoo(): ?string
+
+    public function isMultiple(): ?string
     {
-        return $this->number < 0  ? null : ($this->number % 3 === 0 ? 'Foo':null);
+        return $this->number < 0 ? null : ($this->number % 3 === 0 ? 'Foo' : null);
+    }
+
+    public function isEqual(): ?string
+    {
+        return $this->number === 3 ? 'Foo' : null;
     }
 
 }
