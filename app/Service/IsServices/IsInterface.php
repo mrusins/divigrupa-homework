@@ -1,5 +1,7 @@
 <?php
-namespace App\Service;
+namespace App\Service\IsServices;
+
+
 interface IsInterface
 {
     public function isMultiple(): ?string;

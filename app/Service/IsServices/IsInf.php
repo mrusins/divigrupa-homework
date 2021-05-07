@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\IsServices;
 
-class IsQix implements IsInterface
+class IsInf implements IsInterface
 {
     private int $number;
 
@@ -15,12 +15,12 @@ class IsQix implements IsInterface
 
     public function isMultiple(): ?string
     {
-        return $this->number < 0 ? null : ($this->number % 7 === 0 ? 'Qix' : null);
+        return $this->number < 0 ? null : ($this->number % 8 === 0 ? 'Inf' : null);
     }
 
     public function isEqual(): ?string
     {
-        return $this->number === 7 ? 'Qix' : null;
+        return $this->number === 8 ? 'Inf' : null;
     }
 
 }

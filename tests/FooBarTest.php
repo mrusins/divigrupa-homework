@@ -3,9 +3,11 @@
 namespace Tests;
 
 use App\Model\Num;
-use App\Service\IsBar;
-use App\Service\IsFoo;
-use App\Service\IsQix;
+
+use App\Service\IsServices\IsBar;
+use App\Service\IsServices\IsFoo;
+use App\Service\IsServices\IsInf;
+use App\Service\IsServices\IsQix;
 use PHPUnit\Framework\TestCase;
 
 class FooBarTest extends TestCase
@@ -83,5 +85,28 @@ class FooBarTest extends TestCase
 
     }
 
+    public function testInf(): void
+    {
+        $numModel = new Num();
+        $numModel->setNumber(8);
+        $number = $numModel->getNumber();
+
+        $testIsInf = new IsInf($number);
+        $this->assertEquals('Inf', $testIsInf->isMultiple());
+        $this->assertEquals('Inf', $testIsInf->isEqual());
+
+        $testNotInf = new IsInf(13);
+        $this->assertEquals(null, $testNotInf->isMultiple());
+        $this->assertEquals(null, $testNotInf->isEqual());
+
+        $testStringToInt = new IsInf('8');
+        $this->assertEquals('Inf', $testStringToInt->isMultiple());
+        $this->assertEquals('Inf', $testStringToInt->isEqual());
+
+        $testPositive = new IsInf(-7);
+        $this->assertEquals(null, $testPositive->isMultiple());
+        $this->assertEquals(null, $testPositive->isEqual());
+
+    }
 
 }
